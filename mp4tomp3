@@ -1,0 +1,8 @@
+#!/bin/bash
+input=$1
+output=${input%.*}.mp3
+echo $input
+echo $output
+if [ $# -gt 0 ]; then
+	vlc -I dummy "$input" --sout="#transcode{acodec=mp3,vcodec=dummy}:standard{access=file,mux=raw,dst=\"$output\"}" vlc://quit
+fi
